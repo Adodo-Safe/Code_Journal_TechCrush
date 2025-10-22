@@ -1,0 +1,9 @@
+<%- include('partials/header', { title: 'Admin Login' }) %>
+
+<h2>Admin Login</h2>
+<form action="/admin/login" method="POST" class="journal-form">
+  <input type="password" name="password" placeholder="Enter admin password" required />
+  <button type="submit">Login</button>
+</form>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,10 @@
+<%- include('partials/header', { title: 'Confirm Delete' }) %>
+
+<h2>Confirm Deletion</h2>
+<p>Enter your email to confirm deletion of this journal.</p>
+<form method="POST" action="/delete/<%= id %>/verify">
+  <input type="email" name="email" placeholder="Your email" required />
+  <button type="submit">Confirm Delete</button>
+</form>
+
+<%- include('partials/footer') %>

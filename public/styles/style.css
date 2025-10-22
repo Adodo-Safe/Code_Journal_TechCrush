@@ -1,0 +1,186 @@
+/* 🌐 General Layout */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f8fc;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 🌟 HEADER */
+.app-header {
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  color: white;
+  padding: 15px 10px;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.app-header .brand h1 {
+  font-size: 1.6em;
+  margin-bottom: 4px;
+}
+
+.app-header .tagline {
+  font-size: 0.9em;
+  opacity: 0.85;
+}
+
+.navbar {
+  margin-top: 8px;
+}
+
+.navbar a {
+  color: white;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.3s ease;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+  color: #e0e0e0;
+}
+
+/* 🧭 MAIN CONTAINER */
+.container {
+  flex: 1;
+  margin-top: 130px; /* space for header */
+  margin-bottom: 80px; /* space for footer */
+  width: 90%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow-y: auto;
+}
+
+/* 📝 JOURNAL LIST */
+.journal-list {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.journal-list li {
+  background: #f9fbff;
+  border-left: 4px solid #007bff;
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.journal-list li:hover {
+  transform: translateX(4px);
+  background: #eef5ff;
+}
+
+.journal-list h3 {
+  margin-bottom: 6px;
+  color: #0056b3;
+}
+
+.journal-list small {
+  display: block;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+/* 🧾 FORM STYLES */
+.journal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.journal-form input,
+.journal-form textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  width: 100%;
+}
+
+.journal-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* 🔘 BUTTONS */
+button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+/* ⚓ FOOTER */
+.app-footer {
+  background: #002b5c;
+  color: #ddd;
+  text-align: center;
+  padding: 15px 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 0.9em;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.15);
+}
+
+.app-footer .social-links {
+  margin-top: 5px;
+}
+
+.app-footer .social-links a {
+  color: #66b2ff;
+  margin: 0 8px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.app-footer .social-links a:hover {
+  text-decoration: underline;
+}
+
+/* 📱 RESPONSIVE DESIGN */
+@media (max-width: 600px) {
+  .navbar a {
+    display: inline-block;
+    margin: 6px;
+    font-size: 0.9em;
+  }
+
+  .container {
+    padding: 18px;
+    margin-top: 120px;
+    margin-bottom: 90px;
+  }
+
+  .app-header .brand h1 {
+    font-size: 1.3em;
+  }
+}

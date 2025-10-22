@@ -1,0 +1,21 @@
+<%- include('partials/header', { title: 'Admin Dashboard' }) %>
+
+<h2>Admin Dashboard</h2>
+<% if (journals.length > 0) { %>
+  <ul class="journal-list">
+    <% journals.forEach(journal => { %>
+      <li>
+        <h3><%= journal.title %></h3>
+        <p><%= journal.note %></p>
+        <small>By: <%= journal.email %></small>
+        <form method="POST" action="/admin/delete/<%= journal._id %>">
+          <button type="submit" class="delete-btn">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No journals found.</p>
+<% } %>
+
+<%- include('partials/footer') %>
