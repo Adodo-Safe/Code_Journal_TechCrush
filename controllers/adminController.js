@@ -52,7 +52,7 @@ export const deleteJournal = async (req, res) => {
 
 export const getUserJournals = async (req, res) => {
   try {
-    const { email } = req.params; // get email from URL
+    const { email } = req.params; 
     const journals = await Journal.find({ email }).sort({ date: -1 });
 
     res.render("userJournals", {

@@ -1,12 +1,37 @@
 </main>
 
-  <footer class="app-footer">
-    <p>&copy; <%= new Date().getFullYear() %>. Code Journal by : Adodo Daniel Imewore. TechCrush Cohort 3.</p>
-    <div class="social-links">
-      <a href="https://github.com/Adodo-Safe" target="_blank">GitHub</a>
-      <a href="https://www.linkedin.com/in/daniel-adodo001?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
-      <a href="https://x.com/Safe0111?t=sarGeg5DLCpNThkJvKT1LQ&s=09" target="_blank">Twitter</a>
-    </div>
-  </footer>
+<footer class="app-footer">
+  <p>&copy; <%= new Date().getFullYear() %>. Code Journal by Adodo Daniel Imewore. TechCrush Cohort 3.</p>
+  <div class="social-links">
+    <a href="https://github.com/Adodo-Safe" target="_blank">GitHub</a>
+    <a href="https://www.linkedin.com/in/daniel-adodo001?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a>
+    <a href="https://x.com/Safe0111?t=sarGeg5DLCpNThkJvKT1LQ&s=09" target="_blank">Twitter</a>
+  </div>
+</footer>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get("success") === "1") {
+    const popup = document.createElement("div");
+    popup.textContent = "Journal entry saved successfully. Confirmation email sent.";
+    popup.style.position = "fixed";
+    popup.style.top = "20px";
+    popup.style.left = "50%";
+    popup.style.transform = "translateX(-50%)";
+    popup.style.background = "#007bff";
+    popup.style.color = "white";
+    popup.style.padding = "12px 18px";
+    popup.style.borderRadius = "8px";
+    popup.style.boxShadow = "0 2px 10px rgba(0,0,0,0.2)";
+    popup.style.fontFamily = "Segoe UI, sans-serif";
+    popup.style.zIndex = "2000";
+    popup.style.transition = "opacity 0.5s ease";
+    popup.style.opacity = "1";
+    document.body.appendChild(popup);
+    setTimeout(() => (popup.style.opacity = "0"), 3500);
+    setTimeout(() => popup.remove(), 4000);
+  }
+</script>
+
 </body>
 </html>
