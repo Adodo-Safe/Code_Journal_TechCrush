@@ -159,36 +159,40 @@ Response: Displays all journals created by that specific email.
 
 
 ---
-
-Folder Structure
-
 Code_Journal_TechCrush/
-├─ config/
-│  ├─ db.js
-│  └─ mail.js
-├─ controllers/
-│  ├─ adminController.js
-│  └─ journalController.js
-├─ models/
-│  └─ journalModel.js
-├─ routes/
-│  ├─ adminRoutes.js
-│  └─ journalRoutes.js
-├─ views/
-│  ├─ adminDashboard.ejs
-│  ├─ userJournals.ejs
-│  ├─ adminLogin.ejs
-│  ├─ index.ejs
-│  └─ partials/
-│     ├─ header.ejs
-│     └─ footer.ejs
-├─ public/
-│  └─ styles.css
-├─ .env (ignored)
-├─ .gitignore
-├─ package.json
-└─ server.js
-
+├── config/
+│   ├── db.js
+│   └── mail.js
+│
+├── controllers/
+│   ├── adminController.js
+│   └── journalController.js
+│
+├── models/
+│   └── journalModel.js
+│
+├── routes/
+│   ├── adminRoutes.js
+│   └── journalRoutes.js
+│
+├── views/
+│   ├── adminDashboard.ejs
+│   ├── adminLogin.ejs
+│   ├── userJournals.ejs
+│   ├── index.ejs
+│   ├── add.ejs
+│   └── partials/
+│       ├── header.ejs
+│       └── footer.ejs
+│
+├── public/
+│   └── styles.css
+│
+├── .env
+├── .gitignore
+├── package.json
+├── server.js
+└── README.md
 
 ---
 
