@@ -163,18 +163,14 @@ Code_Journal_TechCrush/
 ├── config/
 │   ├── db.js
 │   └── mail.js
-│
 ├── controllers/
 │   ├── adminController.js
 │   └── journalController.js
-│
 ├── models/
 │   └── journalModel.js
-│
 ├── routes/
 │   ├── adminRoutes.js
 │   └── journalRoutes.js
-│
 ├── views/
 │   ├── adminDashboard.ejs
 │   ├── adminLogin.ejs
@@ -184,10 +180,8 @@ Code_Journal_TechCrush/
 │   └── partials/
 │       ├── header.ejs
 │       └── footer.ejs
-│
 ├── public/
 │   └── styles.css
-│
 ├── .env
 ├── .gitignore
 ├── package.json
