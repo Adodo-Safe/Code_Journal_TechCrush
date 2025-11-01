@@ -1,13 +1,53 @@
 <%- include('partials/header', { title: 'Admin Dashboard' }) %>
 
 <h2>Admin Dashboard</h2>
+
+<section class="analytics">
+  <h3>Analytics Overview</h3>
+  <div class="stats">
+    <div class="stat-card">
+      <h4>Total Entries</h4>
+      <p><%= journals.length %></p>
+    </div>
+
+    <div class="stat-card">
+      <h4>Unique Users</h4>
+      <ul class="user-list">
+        <% 
+          const uniqueEmails = [...new Set(journals.map(j => j.email))];
+          uniqueEmails.forEach(email => { 
+        %>
+          <li>
+            <a href="/admin/user/<%= encodeURIComponent(email) %>"><%= email %></a>
+          </li>
+        <% }) %>
+      </ul>
+    </div>
+
+    <div class="stat-card">
+      <h4>Last Entry Date</h4>
+      <p>
+        <% if (journals.length > 0) { %>
+          <%= new Date(journals[0].date).toLocaleString() %>
+        <% } else { %>
+          N/A
+        <% } %>
+      </p>
+    </div>
+  </div>
+</section>
+
+<hr>
+
+<h3>Journal Entries</h3>
 <% if (journals.length > 0) { %>
   <ul class="journal-list">
     <% journals.forEach(journal => { %>
       <li>
         <h3><%= journal.title %></h3>
         <p><%= journal.note %></p>
-        <small>By: <%= journal.email %></small>
+        <small>By: <%= journal.email %></small><br>
+        <small>Date: <%= new Date(journal.date).toLocaleString() %></small>
         <form method="POST" action="/admin/delete/<%= journal._id %>">
           <button type="submit" class="delete-btn">Delete</button>
         </form>

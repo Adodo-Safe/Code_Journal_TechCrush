@@ -1,0 +1,24 @@
+<%- include('partials/header', { title: 'User Journals' }) %>
+
+<h2>Journals by <%= email %></h2>
+
+<% if (journals.length > 0) { %>
+  <ul class="journal-list">
+    <% journals.forEach(journal => { %>
+      <li>
+        <h3><%= journal.title %></h3>
+        <p><%= journal.note %></p>
+        <small>Date: <%= new Date(journal.date).toLocaleString() %></small>
+        <form method="POST" action="/admin/delete/<%= journal._id %>" style="margin-top: 8px;">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+<% } else { %>
+  <p>No journals found for this user.</p>
+<% } %>
+
+<a href="/admin/dashboard" class="back-btn">← Back to Dashboard</a>
+
+<%- include('partials/footer') %>
