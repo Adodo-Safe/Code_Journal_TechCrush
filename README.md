@@ -26,6 +26,15 @@ Admins can log in, view stats, delete entries, and filter journals by user email
 - **Utilities:** dotenv for environment variables, Nodemailer for sending emails
 
 ---
+##Email Functionality
+
+This app uses Mailtrap as a sandbox for sending confirmation emails.
+To test email functionality, you need a Mailtrap account and must update your .env file with your Mailtrap credentials:
+
+- EMAIL_USER=your_mailtrap_username
+- EMAIL_PASS=your_mailtrap_password
+
+---
 
 ## Installation
 
@@ -38,9 +47,11 @@ Create a .env file with:
 
 PORT=3000
 MONGO_URI=your_mongodb_connection_string
-ADMIN_PASSWORD=your_admin_password
-EMAIL_USER=your_email
-EMAIL_PASS=your_email_password
+ADMIN_PASSWORD=your_admin_password(Use any password of your choise)
+EMAIL_USER=your_mailtrap_user
+EMAIL_HOST=sandbox.smtp.mailtrap.io
+EMAIL_PASS=your_mailtrap_password
+EMAIL_PORT=2525.
 
 Run the app:
 
@@ -166,7 +177,7 @@ Response: { "success": true, "message": "Journal deleted successfully" }
 
 4. Admin Login
 
-
+ 
 
 Method: POST
 
