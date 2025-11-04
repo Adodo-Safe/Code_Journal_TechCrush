@@ -1,5 +1,6 @@
-Code Journal (TechCrush Project)
+---
 
+Code Journal (TechCrush Project)
 A simple journal web app built with Node.js, Express, MongoDB (Mongoose), and EJS.
 Users can add and view journals with email confirmation.
 Admins can log in, view stats, delete entries, and filter journals by user email.
@@ -11,15 +12,11 @@ Features
 
 Add, view, and delete journal entries
 
-Confirmation email sent automatically when a journal is created
+Confirmation email sent after each journal submission
 
-Admin login with password protection
+Admin dashboard with total entries and unique users
 
-Dashboard with total entries, unique users, and weekly stats
-
-Admin can filter journals by clicking a user’s email
-
-Responsive and modular EJS templates
+Filter journals by clicking a user’s email
 
 
 
@@ -37,163 +34,140 @@ Utilities: dotenv for environment variables, Nodemailer for sending emails
 
 
 
+
 ---
 
 Installation
 
-# Clone the repository
 git clone https://github.com/Adodo-Safe/Code_Journal_TechCrush.git
 cd Code_Journal_TechCrush
-
-# Install dependencies
 npm install
 
-
----
-
-Create a .env file in the root directory
+Create a .env file:
 
 PORT=3000
 MONGO_URI=your_mongodb_connection_string
 ADMIN_PASSWORD=your_admin_password
+EMAIL_USER=your_email
+EMAIL_PASS=your_email_password
 
-# Mail configuration (for email confirmation)
-EMAIL_HOST=smtp.mailtrap.io
-EMAIL_PORT=2525
-EMAIL_USER=your_mail_user
-EMAIL_PASS=your_mail_password
+Run the app:
 
+node server.js
 
----
-
-Run the Application
-
-npm start
-# or with nodemon
-npm run dev
-
-Visit the app at:
+Visit:
 http://localhost:3000
 
 
 ---
 
-API Testing (Using Postman)
+Folder Structure
 
-Below are the key routes you can test using Postman:
+Code_Journal_TechCrush/
+├─ config/
+│  ├─ db.js
+│  └─ mail.js
+├─ controllers/
+│  ├─ adminController.js
+│  └─ journalController.js
+├─ models/
+│  └─ journalModel.js
+├─ routes/
+│  ├─ adminRoutes.js
+│  └─ journalRoutes.js
+├─ views/
+│  ├─ index.ejs
+│  ├─ add.ejs
+│  ├─ adminDashboard.ejs
+│  ├─ adminLogin.ejs
+│  ├─ userJournals.ejs
+│  └─ partials/
+│     ├─ header.ejs
+│     └─ footer.ejs
+├─ public/
+│  └─ styles.css
+├─ .env
+├─ .gitignore
+├─ package.json
+└─ server.js
 
-Public Routes
 
-1. Add Journal
+---
+
+API Routes
+
+Public
+
+GET    http://localhost:3000/                  → Fetch all journals (EJS)
+GET    http://localhost:3000/add              → Render add journal page
+POST   http://localhost:3000/add              → Add new journal (JSON body)
+POST   http://localhost:3000/delete           → Delete a journal by ID and email
+GET    http://localhost:3000/api/all          → Fetch all journals (JSON)
+
+Admin
+
+GET    http://localhost:3000/admin/           → Render admin login page
+POST   http://localhost:3000/admin/login      → Admin login
+GET    http://localhost:3000/admin/dashboard  → View all journals & analytics
+POST   http://localhost:3000/admin/delete/:id → Delete a journal by ID
+GET    http://localhost:3000/api/user/:email → View journals by user(json)
+GET    http://localhost:3000/admin/user/:email → View journals by user(page)
+
+
+---
+
+Testing with Postman
+
+1. Add a Journal
 
 Method: POST
-URL: http://localhost:3000/journal/add
-Body (raw JSON):
+URL: http://localhost:3000/add
+Body (JSON):
 
 {
   "title": "My First Journal",
-  "note": "Learning Node.js is fun!",
+  "note": "Learning Node.js with TechCrush is awesome!",
   "email": "user@example.com"
 }
 
-Response:
-Redirects to home page and sends a confirmation email to the provided address.
-
-
----
-
-2. View All Journals
+2. Get All Journals (JSON)
 
 Method: GET
-URL: http://localhost:3000/
-Description: Displays all journals on the home page.
+URL: http://localhost:3000/api/all
 
+3. Delete a Journal
 
----
+Method: POST
+URL: http://localhost:3000/delete
+Body (JSON):
 
-Admin Routes
+{
+  "id": "your_journal_id",
+  "email": "user@example.com"
+}
 
-1. Admin Login
+4. Admin Login
 
 Method: POST
 URL: http://localhost:3000/admin/login
-Body (raw JSON):
+Body (JSON):
 
 {
   "password": "your_admin_password"
 }
 
-Response: Redirects to the admin dashboard.
-
-
----
-
-2. View Dashboard
-
-Method: GET
-URL: http://localhost:3000/admin/dashboard
-Description: Shows all journal entries, total journals, unique users, and weekly stats.
-Admin can filter journals by clicking a user’s email.
-
-
----
-
-3. Delete a Journal
-
-Method: POST
-URL: http://localhost:3000/admin/delete/:id
-Example:
-http://localhost:3000/admin/delete/671c2a4f9e23b1a35e1d1234
-Response: Journal deleted successfully and redirects to dashboard.
-
-
----
-
-4. View Journals by User
-
-Method: GET
-URL: http://localhost:3000/admin/user/:email
-Example:
-http://localhost:3000/admin/user/user@example.com
-Response: Displays all journals created by that specific email.
-
-
----
-Code_Journal_TechCrush/
-├── config/
-│   ├── db.js
-│   └── mail.js
-├── controllers/
-│   ├── adminController.js
-│   └── journalController.js
-├── models/
-│   └── journalModel.js
-├── routes/
-│   ├── adminRoutes.js
-│   └── journalRoutes.js
-├── views/
-│   ├── adminDashboard.ejs
-│   ├── adminLogin.ejs
-│   ├── userJournals.ejs
-│   ├── index.ejs
-│   ├── add.ejs
-│   └── partials/
-│       ├── header.ejs
-│       └── footer.ejs
-├── public/
-│   └── styles.css
-├── .env
-├── .gitignore
-├── package.json
-├── server.js
-└── README.md
 
 ---
 
 Security
 
-.env file is gitignored
+.env is gitignored
 
 Admin password and MongoDB URI stored securely in environment variables
 
 Nodemailer credentials never exposed in source code
+
+
+
+
+---

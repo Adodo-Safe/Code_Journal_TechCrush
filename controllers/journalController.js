@@ -53,17 +53,27 @@ export const createJournal = async (req, res) => {
 export const deleteUserJournal = async (req, res) => {
   try {
     const { id, email } = req.body;
-    if (!id || !email) return res.status(400).send("Missing id or email");
+
+    if (!id || !email)
+      return res.status(400).json({ success: false, message: "Missing id or email" });
 
     const journal = await Journal.findById(id);
-    if (!journal) return res.status(404).send("Journal not found");
+    if (!journal)
+      return res.status(404).json({ success: false, message: "Journal not found" });
+
     if (journal.email !== email)
-      return res.status(403).send("Unauthorized: email mismatch");
+      return res.status(403).json({ success: false, message: "Unauthorized: email mismatch" });
 
     await Journal.findByIdAndDelete(id);
-    res.redirect("/");
+
+    console.log(`Journal with ID ${id} deleted by ${email}`);
+
+    return res.status(200).json({
+      success: true,
+      message: "Journal deleted successfully"
+    });
   } catch (err) {
     console.error(err);
-    res.status(400).send(err.message);
+    res.status(400).json({ success: false, message: err.message });
   }
 };
