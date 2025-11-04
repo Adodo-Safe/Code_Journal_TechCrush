@@ -1,44 +1,34 @@
 ---
 
-Code Journal (TechCrush Project)
-A simple journal web app built with Node.js, Express, MongoDB (Mongoose), and EJS.
-Users can add and view journals with email confirmation.
+# Code Journal (TechCrush Project)
+
+A simple journal web app built with **Node.js**, **Express**, **MongoDB (Mongoose)**, and **EJS**.  
+Users can add and view journals with email confirmation.  
 Admins can log in, view stats, delete entries, and filter journals by user email.
 
+---
+
+## Features
+
+- Add, view, and delete journal entries
+- Confirmation email sent after each journal submission
+- Admin dashboard with total entries and unique users
+- Filter journals by clicking a user’s email
 
 ---
 
-Features
+## Tech Stack
 
-Add, view, and delete journal entries
-
-Confirmation email sent after each journal submission
-
-Admin dashboard with total entries and unique users
-
-Filter journals by clicking a user’s email
-
-
+- **Backend:** Node.js, Express
+- **Database:** MongoDB (Mongoose)
+- **Frontend:** EJS Templates, CSS
+- **Utilities:** dotenv for environment variables, Nodemailer for sending emails
 
 ---
 
-Tech Stack
+## Installation
 
-Backend: Node.js, Express
-
-Database: MongoDB (Mongoose)
-
-Frontend: EJS Templates, CSS
-
-Utilities: dotenv for environment variables, Nodemailer for sending emails
-
-
-
-
----
-
-Installation
-
+```bash
 git clone https://github.com/Adodo-Safe/Code_Journal_TechCrush.git
 cd Code_Journal_TechCrush
 npm install
@@ -55,8 +45,7 @@ Run the app:
 
 node server.js
 
-Visit:
-http://localhost:3000
+Visit: http://localhost:3000
 
 
 ---
@@ -98,20 +87,26 @@ API Routes
 
 Public
 
-GET    http://localhost:3000/                  → Fetch all journals (EJS)
-GET    http://localhost:3000/add              → Render add journal page
-POST   http://localhost:3000/add              → Add new journal (JSON body)
-POST   http://localhost:3000/delete           → Delete a journal by ID and email
-GET    http://localhost:3000/api/all          → Fetch all journals (JSON)
+Method	Route	Description
+
+GET	/	Fetch all journals (EJS view)
+GET	/add	Render add journal page
+POST	/add	Add new journal (JSON body)
+POST	/delete	Delete a journal by ID and email
+GET	/api/all	Fetch all journals (JSON)
+GET	/api/user/:email	Fetch journals by specific user
+
 
 Admin
 
-GET    http://localhost:3000/admin/           → Render admin login page
-POST   http://localhost:3000/admin/login      → Admin login
-GET    http://localhost:3000/admin/dashboard  → View all journals & analytics
-POST   http://localhost:3000/admin/delete/:id → Delete a journal by ID
-GET    http://localhost:3000/api/user/:email → View journals by user(json)
-GET    http://localhost:3000/admin/user/:email → View journals by user(page)
+Method	Route	Description
+
+GET	/admin/	Render admin login page
+POST	/admin/login	Admin login
+GET	/admin/dashboard	View all journals & analytics
+POST	/admin/delete/:id	Delete a journal by ID
+GET	/admin/user/:email	View journals by user (page)
+
 
 
 ---
@@ -121,8 +116,11 @@ Testing with Postman
 1. Add a Journal
 
 Method: POST
+
 URL: http://localhost:3000/add
+
 Body (JSON):
+
 
 {
   "title": "My First Journal",
@@ -130,31 +128,71 @@ Body (JSON):
   "email": "user@example.com"
 }
 
+Response:
+
+{
+  "success": true,
+  "message": "Journal entry saved successfully"
+}
+
 2. Get All Journals (JSON)
 
 Method: GET
+
 URL: http://localhost:3000/api/all
+
+
+Response: JSON array of all journal entries.
 
 3. Delete a Journal
 
 Method: POST
+
 URL: http://localhost:3000/delete
+
 Body (JSON):
+
 
 {
   "id": "your_journal_id",
   "email": "user@example.com"
 }
 
+Response:
+
+{
+  "success": true,
+  "message": "Journal deleted successfully"
+}
+
 4. Admin Login
 
 Method: POST
+
 URL: http://localhost:3000/admin/login
+
 Body (JSON):
+
 
 {
   "password": "your_admin_password"
 }
+
+Response:
+
+{
+  "success": true,
+  "message": "Admin logged in successfully"
+}
+
+5. View Journals by User (JSON)
+
+Method: GET
+
+URL: http://localhost:3000/api/user/:email
+
+Response: JSON array of journals for that user.
+
 
 
 ---
@@ -165,8 +203,7 @@ Security
 
 Admin password and MongoDB URI stored securely in environment variables
 
-Nodemailer credentials never exposed in source code
-
+Nodemailer credentials are never exposed in source code
 
 
 
