@@ -9,16 +9,46 @@
         <h3><%= journal.title %></h3>
         <p><%= journal.note %></p>
         <small>By: <%= journal.email %></small>
-       <form method="POST" action="/delete">
-        <input type="hidden" name="id" value="<%= journal._id %>">
-        <input type="hidden" name="email" value="<%= journal.email %>">
-        <button type="submit" class="delete-btn">Delete</button>
-       </form>
+        <form method="POST" action="/delete">
+          <input type="hidden" name="id" value="<%= journal._id %>">
+          <input type="hidden" name="email" value="<%= journal.email %>">
+          <button type="submit" class="delete-btn">Delete</button>
+        </form>
       </li>
     <% }) %>
   </ul>
 <% } else { %>
   <p>No journal entries yet.</p>
 <% } %>
+
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+
+  let message = "";
+  if (urlParams.get("success") === "1") {
+    message = "Journal entry saved successfully.";
+  } else if (urlParams.get("deleted") === "1") {
+    message = "Journal entry deleted successfully.";
+  }
+
+  if (message) {
+    const popup = document.createElement("div");
+    popup.textContent = message;
+    popup.style.position = "fixed";
+    popup.style.top = "20px";
+    popup.style.right = "20px";
+    popup.style.background = "#007bff";
+    popup.style.color = "white";
+    popup.style.padding = "10px 16px";
+    popup.style.borderRadius = "6px";
+    popup.style.boxShadow = "0 2px 8px rgba(0,0,0,0.2)";
+    popup.style.zIndex = "2000";
+    popup.style.fontFamily = "Segoe UI, sans-serif";
+    document.body.appendChild(popup);
+
+    setTimeout(() => popup.remove(), 4000);
+    window.history.replaceState({}, document.title, "/");
+  }
+</script>
 
 <%- include('partials/footer') %>

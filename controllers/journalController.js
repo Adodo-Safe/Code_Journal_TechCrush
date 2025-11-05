@@ -1,22 +1,27 @@
 import Journal from "../models/journalModel.js";
 import { sendMail } from "../config/mail.js";
 
+// Fetch all journals and render homepage
 export const getJournals = async (req, res) => {
   try {
     const journals = await Journal.find().sort({ date: -1 });
-    res.render("index", { journals, success: req.query.success });
+    res.render("index", { 
+      journals, 
+      success: req.query.success, 
+      deleted: req.query.deleted 
+    });
   } catch (err) {
     console.error(err);
     res.status(500).send("Server error");
   }
 };
 
-// Render add page
+// Render the page to add a new journal
 export const renderAddPage = (req, res) => {
   res.render("add");
 };
 
-// Create journal + send confirmation email
+// Create a new journal entry and send confirmation email
 export const createJournal = async (req, res) => {
   try {
     const { title, note, email } = req.body;
@@ -49,31 +54,45 @@ export const createJournal = async (req, res) => {
   }
 };
 
-// User deletes own journal by verifying email
+// Delete a journal entry (verifies ID and email)
 export const deleteUserJournal = async (req, res) => {
   try {
     const { id, email } = req.body;
 
-    if (!id || !email)
-      return res.status(400).json({ success: false, message: "Missing id or email" });
+    if (!id || !email) {
+      const msg = { success: false, message: "Missing id or email" };
+      return req.headers["content-type"]?.includes("application/json")
+        ? res.status(400).json(msg)
+        : res.redirect("/?deleted=0");
+    }
 
     const journal = await Journal.findById(id);
-    if (!journal)
-      return res.status(404).json({ success: false, message: "Journal not found" });
+    if (!journal) {
+      const msg = { success: false, message: "Journal not found" };
+      return req.headers["content-type"]?.includes("application/json")
+        ? res.status(404).json(msg)
+        : res.redirect("/?deleted=0");
+    }
 
-    if (journal.email !== email)
-      return res.status(403).json({ success: false, message: "Unauthorized: email mismatch" });
+    if (journal.email !== email) {
+      const msg = { success: false, message: "Unauthorized: email mismatch" };
+      return req.headers["content-type"]?.includes("application/json")
+        ? res.status(403).json(msg)
+        : res.redirect("/?deleted=0");
+    }
 
     await Journal.findByIdAndDelete(id);
-
     console.log(`Journal with ID ${id} deleted by ${email}`);
 
-    return res.status(200).json({
-      success: true,
-      message: "Journal deleted successfully"
-    });
+    const msg = { success: true, message: "Journal deleted successfully" };
+    return req.headers["content-type"]?.includes("application/json")
+      ? res.status(200).json(msg)
+      : res.redirect("/?deleted=1");
   } catch (err) {
     console.error(err);
-    res.status(400).json({ success: false, message: err.message });
+    const msg = { success: false, message: err.message };
+    return req.headers["content-type"]?.includes("application/json")
+      ? res.status(400).json(msg)
+      : res.redirect("/?deleted=0");
   }
 };

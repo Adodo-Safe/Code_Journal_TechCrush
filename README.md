@@ -1,36 +1,49 @@
+---
 
-# Code Journal (TechCrush Project)
+Code Journal (TechCrush Project)
 
-A simple journal web app built with Node.js, Express, MongoDB (Mongoose), and EJS.  
-Users can add and view journals with email confirmation.  
+A simple journal web app built with Node.js, Express, MongoDB (Mongoose), and EJS.
+Users can add and view journals with email confirmation.
 Admins can log in, view stats, delete entries, and filter journals by user email.
 
----
-
-## Features
-
-- Add, view, and delete journal entries
-- Confirmation email sent after each journal submission
-- Admin dashboard with total entries and unique users
-- Filter journals by clicking a user’s email
 
 ---
 
-## Tech Stack
+Features
 
-- **Backend:** Node.js, Express
-- **Database:** MongoDB (Mongoose)
-- **Frontend:** EJS Templates, CSS
-- **Utilities:** dotenv for environment variables, Nodemailer for sending emails
+Add, view, and delete journal entries
+
+Confirmation popup after creating or deleting a journal
+
+Confirmation email sent after each journal submission
+
+Admin dashboard with total entries and unique users
+
+Filter journals by clicking a user’s email
+
+
 
 ---
 
-## Email Functionality
+Tech Stack
 
-This app uses **Mailtrap** as a sandbox for sending confirmation emails.  
-To test email functionality, you need a Mailtrap account and must update your `.env` file with your Mailtrap credentials:
+Backend: Node.js, Express
 
-```env
+Database: MongoDB (Mongoose)
+
+Frontend: EJS Templates, CSS
+
+Utilities: dotenv for environment variables, Nodemailer for sending emails
+
+
+
+---
+
+Email Functionality
+
+This app uses Mailtrap as a sandbox for sending confirmation emails.
+To test email functionality, you need a Mailtrap account and must update your .env file with your Mailtrap credentials:
+
 EMAIL_USER=your_mailtrap_username
 EMAIL_PASS=your_mailtrap_password
 EMAIL_HOST=sandbox.smtp.mailtrap.io
@@ -59,7 +72,8 @@ Run the app:
 
 node server.js
 
-Visit: http://localhost:3000
+Visit:
+http://localhost:3000
 
 
 ---
@@ -125,16 +139,14 @@ GET	http://localhost:3000/admin/user/:email	View journals by user (Page)
 
 ---
 
-Testing with Postman / cURL
+Testing with Postman
 
 1. Add a Journal
 
 Method: POST
-
 URL: http://localhost:3000/add
 
 Body (JSON):
-
 
 {
   "title": "My First Journal",
@@ -144,7 +156,6 @@ Body (JSON):
 
 Response:
 
-
 { "success": true, "message": "Journal added successfully" }
 
 
@@ -153,11 +164,9 @@ Response:
 2. Get All Journals (JSON)
 
 Method: GET
-
 URL: http://localhost:3000/api/all
 
 Response: List of all journal objects
-
 
 
 ---
@@ -165,11 +174,9 @@ Response: List of all journal objects
 3. Delete a Journal
 
 Method: POST
-
 URL: http://localhost:3000/delete
 
 Body (JSON):
-
 
 {
   "id": "your_journal_id",
@@ -177,7 +184,6 @@ Body (JSON):
 }
 
 Response:
-
 
 { "success": true, "message": "Journal deleted successfully" }
 
@@ -187,18 +193,15 @@ Response:
 4. Admin Login
 
 Method: POST
-
 URL: http://localhost:3000/admin/login
 
 Body (JSON):
-
 
 {
   "password": "your_admin_password"
 }
 
 Response:
-
 
 { "success": true, "message": "Login successful" }
 
@@ -208,11 +211,9 @@ Response:
 5. View Journals by User (JSON)
 
 Method: GET
-
 URL: http://localhost:3000/api/user/user@example.com
 
 Response: List of journal objects filtered by email
-
 
 
 ---
@@ -220,11 +221,9 @@ Response: List of journal objects filtered by email
 6. View Journals by User (Page)
 
 Method: GET
-
 URL: http://localhost:3000/admin/user/user@example.com
 
 Response: HTML page showing journals filtered by user email
-
 
 
 ---
@@ -236,6 +235,7 @@ Security
 Admin password and MongoDB URI stored securely in environment variables
 
 Nodemailer credentials never exposed in source code
+
 
 
 ---
